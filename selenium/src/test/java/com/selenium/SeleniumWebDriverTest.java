@@ -2,7 +2,7 @@ package com.selenium;
 
 import org.junit.jupiter.api.Test;
 
-public class SeleniumApplicationTests {
+class SeleniumWebDriverTest {
 
 	@Test
 	void contextLoads() {

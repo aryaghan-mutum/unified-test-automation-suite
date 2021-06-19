@@ -18,6 +18,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <allure-java-commons.version>2.14.0</allure-java-commons.version>
     </properties>
 
     <!-- sub modules -->
@@ -48,7 +49,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-java-commons</artifactId>
-            <version>2.14.0</version>
+            <version>${allure-java-commons.version}</version>
         </dependency>
 
 

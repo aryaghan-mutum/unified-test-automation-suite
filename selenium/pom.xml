@@ -13,11 +13,13 @@
 	<artifactId>selenium</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>selenium</name>
-	<description>A framework with selenium functionalities </description>
+	<description>A framework with selenium functionalities</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<selenium.version>3.7.0</selenium.version>
+		<skyscreamer.version>1.5.0</skyscreamer.version>
+		<common-utils.version>0.0.1-SNAPSHOT</common-utils.version>
 	</properties>
 
 	<modules>
@@ -57,15 +59,23 @@
 		<dependency>
 			<groupId>org.skyscreamer</groupId>
 			<artifactId>jsonassert</artifactId>
-			<version>1.5.0</version>
+			<version>${skyscreamer.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>com</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>${common-utils.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
 	<build>
 		<plugins>
