@@ -1,58 +1,62 @@
 package com.logger.logging;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.Logger;
+import org.springframework.context.annotation.Description;
 
+@Slf4j
 public class LogHandler {
 
-    private static final Logger log = null;
-
-    /**
-     * Printing to Debug file
-     */
-    public static void debugPrintTestInitHeader() {
+    @Description("Prints header name")
+    public static void logHeader(String header) {
+        log.info("******************" + header + "******************");
+    }
+    
+    @Description("Prints Test Starts")
+    public static void logTestStarts() {
         String testName = Thread.currentThread().getStackTrace()[2].getMethodName();
-        log.debug("**********************************");
-        log.debug("Starting Test: {}", testName);
+        log.info("************************************");
+        log.info("Starting Test: {}", testName);
     }
 
-    public static void debugPrintHeader(String header) {
-        log.debug("****************" + header + "****************");
+    @Description("Prints Test Ends")
+    public static void logTestEnds() {
+        log.info("Test End");
+        log.info("************************************");
     }
 
-    public static void debugPrintLocalizationHeader(String language) {
+    @Description("Prints language and header name")
+    public static void logLangHeader(String language) {
         String testName = Thread.currentThread().getStackTrace()[2].getMethodName();
-        log.debug("**********************************");
-        log.debug("Starting Test: {}", testName);
-        log.debug("Language" + language);
+        log.info("************************************");
+        log.info("Starting Test: {} ", testName);
+        log.info("Language: " + language);
     }
 
-    public static void debugPrintTestFinishedHeader() {
-        log.debug("Test Complete");
-        log.debug("**********************************");
-    }
-
-    private static void debugPrint(String message) {
-        debugPrint(0, message);
-    }
-
-    public static void debugPrint(int indentLevel, String message) {
+    @Description("Prints based on indent level (index). By default the index is 0")
+    public static void logger(int indentLevel, String message) {
         if (indentLevel == 0) {
-            log.debug(message);
+            log.info(message);
         } else {
-            log.debug(StringUtils.repeat("\t", indentLevel) + message);
+            log.info(StringUtils.repeat("\t", indentLevel) + message);
         }
     }
 
-    public static void debugPrint(String message, Object... args) {
-        debugPrint(0, message, args);
+    @Description("Prints based on indent level (index). By default the index is 0")
+    public static void logger(String message, Object... args) {
+        logByIndentLevel(0, message, args);
     }
 
-    public static void debugPrint(int indentLevel, String message, Object... args) {
+    @Description("Prints based on indent level (index). By default the index is 0")
+    public static void logByIndentLevel(int indentLevel, String message, Object... args) {
         if (indentLevel == 0) {
-            log.debug(message, args);
+            log.info(message, args);
         } else {
-            log.debug(StringUtils.repeat("\t", indentLevel) + message, args);
+            log.info(StringUtils.repeat("\t", indentLevel) + message, args);
         }
+    }
+
+    private static void logByIndentLevel(String message) {
+        logger(0, message);
     }
 }
