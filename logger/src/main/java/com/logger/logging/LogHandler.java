@@ -11,7 +11,7 @@ public class LogHandler {
     public static void logHeader(String header) {
         log.info("******************" + header + "******************");
     }
-    
+
     @Description("Prints Test Starts")
     public static void logTestStarts() {
         String testName = Thread.currentThread().getStackTrace()[2].getMethodName();

@@ -1,52 +1,53 @@
 package com.commonutils;
 
 import org.apache.commons.lang3.StringUtils;
-
-import java.lang.reflect.InvocationTargetException;
+import org.springframework.context.annotation.Description;
 
 public class CoreUtil {
 
-    /**
-     * Get the Class name from call stack
-     */
-    public static String getSimpleClassName() {
-        String returnValue = null;
+    @Description("Get the class name from call stack")
+    public static String getClassName() {
         int iPos = 0;
-        returnValue = Thread.currentThread().getStackTrace()[2].getClassName();
+        String className;
+        className = Thread.currentThread().getStackTrace()[2].getClassName();
 
-        if (returnValue != null) {
-            iPos = StringUtils.lastIndexOf(returnValue, ".");
+        if (className != null) {
+            iPos = StringUtils.lastIndexOf(className, ".");
 
             if (iPos > 0) {
-                returnValue = returnValue.substring(iPos + 1);
+                className = className.substring(iPos + 1);
             }
         }
 
-        return returnValue;
+        return className;
     }
 
-    /**
-     * Get the method name for a depth in call stack.
-     * @param depth depth in the class stack (0 means current method, 1 means call method, ...)
-     */
-    private static String getMethodName(final int depth) {
-        String returnValue = null;
+    @Description("Get the class name by depth")
+    public static String getClassNameByDepth(final int depth) {
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-        returnValue = ste[2 + depth].getMethodName();
-        return returnValue;
+        final String className = ste[2 + depth].getClassName();
+        return className;
     }
 
-    public static String getClassName(final int depth) {
-        String returnValue = null;
+    @Description("Get the method name from call stack")
+    public static String getMethodName() {
+        final int depth = 0;
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-        returnValue = ste[2 + depth].getClassName();
-        return returnValue;
+        final String methodName = ste[2 + 0].getMethodName();
+        return methodName;
     }
 
+    @Description("Get the method name for a depth in call stack. @param depth: In the class stack (0 means current method, 1 means call method, ...")
+    public static String getMethodNameByDepth(final int depth) {
+        final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+        final String methodName = ste[2 + depth].getMethodName();
+        return methodName;
+    }
+
+    @Description("Get the method name with colon space")
     public static String getMethodNameColonSpace(final int depth) {
-        String returnValue = null;
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-        returnValue = ste[2 + depth].getMethodName() + ":" + " ";
-        return returnValue;
+        final String methodName = ste[2 + depth].getMethodName() + ":" + " ";
+        return methodName;
     }
 }

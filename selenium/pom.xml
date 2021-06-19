@@ -20,6 +20,10 @@
 		<selenium.version>3.7.0</selenium.version>
 	</properties>
 
+	<modules>
+		<module>../logger</module>
+	</modules>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

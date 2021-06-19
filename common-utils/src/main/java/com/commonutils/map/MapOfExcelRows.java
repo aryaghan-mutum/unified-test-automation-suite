@@ -11,4 +11,5 @@ public class MapOfExcelRows extends LinkedHashMap<String, List<MapOfObjects>> {
             put(entry.getKey(), ListOfMapsUtil.convert(entry.getValue()));
         });
     }
+
 }

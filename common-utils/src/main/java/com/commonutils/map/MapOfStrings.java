@@ -31,9 +31,8 @@ public class MapOfStrings extends LinkedHashMap<String, String> {
         put(key, value == null ? null : value.toString());
     }
 
-
     public String getString(Object key) {
-        return (String) this.get(key);
+        return this.get(key);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.testautomation.core.exceptions;
+package com.commonutils.exceptions;
 
 import lombok.NoArgsConstructor;
 

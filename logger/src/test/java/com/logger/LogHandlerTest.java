@@ -1,9 +1,11 @@
 package com.logger;
 
 import com.logger.logging.LogHandler;
+import com.logger.logging.Pair;
+import com.logger.logging.ParameterizedLogHandler;
 import org.junit.jupiter.api.Test;
 
-class LoggerApplicationTests {
+public class LogHandlerTest {
 
     @Test
     void testLogByIndentLevel() {
@@ -19,6 +21,12 @@ class LoggerApplicationTests {
         LogHandler.logTestStarts();
         LogHandler.logTestEnds();
         LogHandler.logLangHeader("french");
+    }
+
+    @Test
+    void testParamLogger() {
+        Pair pair = new Pair("tester", 10101);
+        ParameterizedLogHandler.paramLogger("tester", pair);
     }
 
 }
