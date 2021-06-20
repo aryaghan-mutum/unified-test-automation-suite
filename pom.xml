@@ -13,6 +13,7 @@
     <groupId>com</groupId>
     <artifactId>unified-test-automation-suite</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>unified-test-automation-suite</name>
     <description>A framework with logging, selenium testing, microservices etc for testers</description>
 

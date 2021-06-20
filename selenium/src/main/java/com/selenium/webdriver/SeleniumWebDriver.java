@@ -56,28 +56,6 @@ public interface SeleniumWebDriver {
     Boolean isElementInvisible(WebDriver driver, LocatorType locatorType, String identifier);
 
     /**
-     * Create a new WebDriver instance for a given browser type.
-     */
-    WebDriver makeDriver(BrowserType browserType);
-
-    /**
-     * Create a new WebDriver instance for a given browser type.
-     */
-    WebDriver makeDriver(String browserType);
-
-    /**
-     * Creates a new WebDriver instance for a given browser type.
-     *
-     * @param buildName - defines the test class associated
-     */
-    WebDriver makeDriver(String browserType, String buildName);
-
-    /**
-     * Creates a new WebDriver instance using the default browser type.
-     */
-    WebDriver makeDriver();
-
-    /**
      * Resize the browser
      */
     void resizeBrowserWindow(WebDriver driver, Integer horizontalSizeInPixels, Integer verticalSizeInPixels);

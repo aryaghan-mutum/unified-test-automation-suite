@@ -1,12 +1,15 @@
 package com.selenium.webdriver;
 
-import com.selenium.enumerations.BrowserType;
+import com.selenium.constants.SeleniumConstants;
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import com.selenium.enumerations.LocatorType;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public enum SeleniumWebDriverImpl implements SeleniumWebDriver {
@@ -23,9 +26,8 @@ public enum SeleniumWebDriverImpl implements SeleniumWebDriver {
 
     @Override
     public WebElement findElement(WebDriver driver, By byLocator) {
-        return null;
-//        (new WebDriverWait(driver, SeleniumConstants.DEFAULT_TIMEOUT_SECONDS))
-//                .until(ExpectedConditions.elementToBeClickable(byLocator));
+        return (new WebDriverWait(driver, SeleniumConstants.DEFAULT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.elementToBeClickable(byLocator));
     }
 
     @Override
@@ -45,54 +47,21 @@ public enum SeleniumWebDriverImpl implements SeleniumWebDriver {
 
     @Override
     public WebElement getElementWhenVisible(WebDriver driver, LocatorType locatorType, String identifier) {
-        return null;
-//                (WebElement) (new WebDriverWait(driver, SeleniumConstants.DEFAULT_TIMEOUT_SECONDS))
-//                .until(ExpectedConditions.presenceOfElementLocated(getByLocator(locatorType, identifier)));
+        return (new WebDriverWait(driver, SeleniumConstants.DEFAULT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.presenceOfElementLocated(getByLocator(locatorType, identifier)));
     }
 
     @Override
     public WebElement getElementWhenClickable(WebDriver driver, LocatorType locatorType, String identifier) {
-        return null;
-//        (new WebDriverWait(driver, SeleniumConstants.DEFAULT_TIMEOUT_SECONDS))
-//                .until(ExpectedConditions.elementToBeClickable(getByLocator(locatorType, identifier)));
+        return (new WebDriverWait(driver, SeleniumConstants.DEFAULT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.elementToBeClickable(getByLocator(locatorType, identifier)));
     }
 
     @Override
     public Boolean isElementInvisible(WebDriver driver, LocatorType locatorType, String identifier) {
-        return null;
-//        (new WebDriverWait(driver, SeleniumConstants.DEFAULT_TIMEOUT_SECONDS))
-//                .until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locatorType, identifier)));
+        return (new WebDriverWait(driver, SeleniumConstants.DEFAULT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locatorType, identifier)));
     }
-
-    @Override
-    public WebDriver makeDriver(BrowserType browserType) {
-        return null;
-    }
-
-//    @Override
-//    public WebDriver makeDriver(BrowserType browserType) {
-//        return null;
-//    }
-
-    @Override
-    public WebDriver makeDriver(String browserType) {
-        return null;
-    }
-
-    @Override
-    public WebDriver makeDriver(String browserType, String buildName) {
-        return null;
-    }
-
-    @Override
-    public WebDriver makeDriver() {
-        return null;
-    }
-
-//    @Override
-//    public NgWebDriver getNgWebDriver(WebDriver driver) {
-//        return new NgWebDriver((JavascriptExecutor) driver);
-//    }
 
     @Override
     public void resizeBrowserWindow(WebDriver driver, Integer horizontalSizeInPixels, Integer verticalSizeInPixels) {
@@ -102,12 +71,12 @@ public enum SeleniumWebDriverImpl implements SeleniumWebDriver {
 
     @Override
     public void shutdownDriver(WebDriver driver) {
-        log.debug("Shutting down WebDriver...");
+        System.out.println("Shutting down WebDriver...");
         if(driver != null) {
             try {
                 driver.quit();
             } catch (Exception e) {
-                log.error("Error during shutdown.", e);
+                System.out.println("Error during shutdown." + e);
             }
         }
     }
@@ -131,16 +100,26 @@ public enum SeleniumWebDriverImpl implements SeleniumWebDriver {
             case CLASSNAME:
                 by = By.className(identifier);
                 break;
+            case NAME:
+                by = By.name(identifier);
+                break;
             case DATA_TARGET:
                 by = By.xpath(String.format("//*[@data-target='#%s']", identifier));
                 break;
             default:
-                log.error("Invalid locator type provided!");
+                System.err.println("Invalid locator type provided!");
         }
         return by;
     }
 
+    @Step("maximize the window")
     public static void maximizeWindow(WebDriver driver) {
         driver.manage().window().maximize();
     }
+
+    @Step("implicitlyWait wait")
+    public static void implicitlyWait(WebDriver driver, int var) {
+        driver.manage().timeouts().implicitlyWait(var, TimeUnit.SECONDS);
+    }
+
 }
